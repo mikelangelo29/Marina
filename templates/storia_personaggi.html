@@ -1,0 +1,36 @@
+{%extends 'common.html'%}
+
+{%block content%}
+
+
+<h1 class="text-center">Personaggi marinesi</h1>
+<!--cards-->
+
+
+<div class="container mt-5">
+    <div class="row">
+        
+      
+{% for psto in per %}  
+        <div class="col-lg-4">
+
+            <div class="card my-4 " style="width: 18rem;">
+                <img src="{{ psto.immagine.url }}" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h2 class="card-title">{{ psto.titolo }}</h2>
+                    <h4 class="card-text text-center">{{ psto.descrizione }}</h4>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">{{ psto.item1 }}</li>
+                </ul>
+                
+            </div>
+        </div>
+  
+
+        {% endfor %}
+
+        <p class="container mb-4" style="text-align: justify; font-style: italic">*Questi i personaggi storici marinesi che abbiamo pensato. Se manca qualcuno, e sicuramente è così, potete gentilmente segnalarlo alla mail della redazione.</p>
+
+
+        {%endblock%}

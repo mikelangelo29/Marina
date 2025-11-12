@@ -1,0 +1,31 @@
+{% extends 'common.html' %}
+
+<!-- {% block head_title %}{{ block.super }} - Cerca nel Sito {% endblock head_title%} -->
+
+{% block content %}
+
+<h1 class="container mt-3">Risultati della ricerca</h1>
+<hr>
+
+
+
+
+
+<div  class="container" class= "row mt-3 ">
+    <div class="col-6">
+       <h5><strong>News</strong></h5> 
+       <hr> 
+        {% if news %}
+            {% for new in news %}
+                <p class="my-1">in<a href="{%url 'notizie' %}"> {{new.titolo}}</a></p>
+                <p class="my-1">{{ new.descrizione|truncatewords:"100" }}</p>
+                
+                <hr>
+            
+                {% endfor %}
+        {% else %}
+            <p>--- Nessun risultato trovato ---</p>
+        {% endif %}
+    </div>
+
+    {%endblock%}

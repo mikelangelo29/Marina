@@ -1,0 +1,74 @@
+{% extends 'common.html' %}
+{%block content%}
+
+   <h4 class="container text-center">Il faro marinese, piccolo portale tutto su Ginosa Marina</h4>
+     <br>
+     <br>
+   <marquee onmouseover="stop()" onmouseout="start()"  behavior="scroll" direction="left" scrollamount="10" style="font-size: 16pt;"> In evidenza:  
+    {% for news in newscroll|slice:":9" %}
+   <a href="{% url 'singolo' news.pk %}" style="text-decoration: none; color:#2A52BE ;"> {{news.titolo}} - {{news.data_creazione |date:"d M Y"}}_____________&nbsp;&nbsp;&nbsp;</a>
+    {% endfor %}
+
+   </marquee>
+<br>
+<br>     
+
+
+    <!--CARD GROUP-->
+    <div class="container card-group">
+
+        {% load static %}  
+        
+        <div class="card">
+            <img src="https://cdn.pixabay.com/photo/2023/04/05/10/56/writing-7901174_960_720.jpg" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">Flash News</h5>
+                <p class="card-text">Brevi notizie riguardanti esclusivamente la borgata marinese. Uno sguardo al presente per far luce su accadimenti, questioni e informazioni alla portata di tutti.</p>
+                <a href="{% url 'notizie' %}"><button type="button" class="btn btn-outline-primary">Scopri di più</button></a>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="{% static 'mare.jpeg' %}" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">Turismo</h5>
+                <p class="card-text">Questa sezione è a disposizione del turista e delle strutture turistico-ricettive di Ginosa Marina. In particolare b&b, alberghi, stabilimenti balneari, food and beverage. </p><br>
+                <a href="{% url 'turismo' %}"><button type="button" class="btn btn-outline-primary">Scopri di più</button></a>
+            </div>
+        </div>  
+        <div class="card">
+            <img src="{% static 'storia.jpg' %}" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">Storia</h5>
+                <p class="card-text">Guardare al passato è un elemento fondamentale per la costruzione di un'identità collettiva che al momento attuale è ancora allo stato embrionale. Chi siamo stati per sapere chi siamo.</p>
+                <a href="{% url 'storia' %}"><button type="button" class="btn btn-outline-primary">Scopri di più</button></a>
+            </div>
+        </div>
+        <div class="card">
+            <img src="{% static 'torre.jpeg' %}" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">Natura</h5>
+                <p class="card-text">Le bellezze naturali del territorio. L'incanto marino, la pineta Regina, i Laghi Salinella con Torre Mattoni:contesti perfetti per lo sviluppo di numerose varietà di flora e fauna locale. </p>
+                <a href="{% url 'natura' %}"><button type="button" class="btn btn-outline-primary">Scopri di più</button></a>
+            </div>
+        </div>
+        <div class="card">
+            <img src="{% static 'leone.jpg' %}" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">Spazio Scuola</h5>
+                <p class="card-text">Non poteva mancare anche uno sguardo al futuro. E chi è questo futuro se non i ragazzi della scuola marinese. Alla loro inventiva, creatività, entusiasmo è interamente dedicato questo spazio</p>
+                <button type="button" class="btn btn-outline-primary" href="">Scopri di più</button>
+            </div>
+        </div>
+ 
+
+            
+
+
+    </div> 
+
+
+
+
+    {%endblock%}
+

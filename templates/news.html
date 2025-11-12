@@ -1,0 +1,79 @@
+{% extends 'common.html' %}
+{%block content%}
+{% load social_share %}
+
+
+{% comment %} <div class="container mt-5 ">
+  <div class="row"> {% endcomment %}
+
+<h1 class="text-center">Flash News</h1>
+<br>
+{% for not in notizie %}
+
+<div class="container card mb-3" style="max-width: 840px;">
+  <div class="container row g-0" style="text-align:justify">
+    <div class="col-md-12">
+      <img src="{{not.immagine.url}}"style="height:280px; width:370px" alt="...">
+    </div>
+    <div class="col-md-10">
+      <div class="card-body"> 
+        <a href= "{% url 'singolo' not.pk %}" style="text-decoration:none"> <h3 class="card-title">{{not.titolo}}</h3></a>
+        <p style= "text-align: justify" class="card-text" >{{not.descrizione|truncatechars:250 }}</p>
+        <p class="card-text"><small class="text-body-secondary">{{ not.data_creazione |date:"d M Y H m"}}</small></p>
+       {% comment %} <a href="{% url 'singolo' not.pk %}"><button type="button" class="btn btn-outline-primary">Leggi l'articolo</button></a>{% endcomment %}       
+       <br>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  {% comment %} <div class=" col">
+    
+    <div class="container card my-4" style="width: 18rem">
+        <img src="{{ not.immagine.url }}" class="card-img-top " style="max-height: 12rem;" alt="...">
+        <div class="container card-body">
+            <h2 class="card-title">{{ not.titolo }}</h2>
+            <p class="card-text text-center" style="font-size: 15pt;">{{ not.descrizione|linebreaks }}</p>
+            <p class="card-text text-end"><small class="text-body-secondary">{{ not.data_creazione |date:"d M Y H m"}}</small></p>
+            <p class="card-text text-end" style="font-style: italic;">{{ not.firma }}</p>
+        
+      
+        </div>
+    </div>
+</div> {% endcomment %}
+
+{%endfor%}
+
+<div class="text-end container">
+    <span class="step-links">
+        {% if notizie.has_previous %}
+            <a href="?pagina=1">&laquo; prima</a>
+            <a href="?pagina={{ notizie.previous_page_number }}">precedente</a>
+        {% endif %}
+
+        <span class="current">
+            Pagina {{ notizie.number }} di {{ notizie.paginator.num_pages }}.
+        </span>
+
+        {% if notizie.has_next %}
+            <a href="?pagina={{ notizie.next_page_number }}">successiva</a>
+            <a href="?pagina={{ notizie.paginator.num_pages }}">ultima &raquo;</a>
+        {% endif %}
+    </span>
+</div>
+
+{%endblock%}
+
+
+
+      
+  
+
+
+
+
+

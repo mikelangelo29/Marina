@@ -1,0 +1,31 @@
+{%extends 'common.html'%}
+
+{%block content%}
+
+
+<h1 class="text-center">Natura alla Marina</h1>
+<p class="text-center">Solo alcune specie locali di flora e fauna pescate nella stragrande varietà presente nel luogo. Quelle più rappresentative della Marina.</p>
+<!--cards-->
+
+<div class="container mt-5 ">
+    <div class="row">
+        
+        {% for nat in specie %}
+        <div class="col">
+
+            <div class="card my-4" style="width: 18rem">
+                <img src="{{ nat.immagine.url }}" class="card-img-top " style="max-height: 12rem;" alt="...">
+                <div class="card-body">
+                    <h2 class="card-title">{{ nat.titolo }}</h2>
+                    <p class="card-text text-center" style="font-size: 15pt;">{{ nat.descrizione }}</p>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item" ;>{{ nat.item1 }}</li>
+                </ul>
+                
+            </div>
+        </div>
+
+            {% endfor %}
+
+        {%endblock%}

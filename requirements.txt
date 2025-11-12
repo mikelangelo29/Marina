@@ -1,0 +1,8 @@
+# --- Requisiti principali Django per Marina ---
+Django>=4.2,<5.0
+gunicorn
+whitenoise
+pillow
+requests
+reportlab
+sqlparse

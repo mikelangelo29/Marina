@@ -1,0 +1,30 @@
+{%extends 'common.html'%}
+
+{%block content%}
+
+
+<h1 class="text-center">Spiagge</h1>
+<!--cards-->
+
+<div class="container mt-5 ">
+    <div class="row">
+        
+        {% for lido in lidi %}
+        <div class="col">
+
+            <div class="card my-4" style="width: 18rem">
+                <img src="{{ lido.immagine.url }}" class="card-img-top " style="max-height: 12rem;" alt="...">
+                <div class="card-body">
+                    <h2 class="card-title">{{ lido.titolo }}</h2>
+                    <p class="card-text text-center" style="font-size: 15pt;">{{ lido.descrizione }}</p>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item" ;>CONTATTI:{{ lido.item1 }}</li>
+                </ul>
+                
+            </div>
+        </div>
+
+            {% endfor %}
+
+        {%endblock%}

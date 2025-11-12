@@ -1,0 +1,30 @@
+{%extends 'common.html'%}
+
+{%block content%}
+
+
+<h1 class="text-center">B&B - Alberghi</h1>
+<!--cards-->
+
+<div class="container mt-5 ">
+    <div class="row">
+        
+        {% for ostello in ostelli %}
+        <div class="col-4">
+
+            <div class="card my-4" style="width: 18rem;">
+                <img src="{{ ostello.immagine.url }}" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h2 class="card-title">{{ ostello.titolo }}</h2>
+                    <h4 class="card-text text-center">{{ ostello.descrizione }}</h4>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">{{ ostello.item1 }}</li>
+                </ul>
+                
+            </div>
+        </div>
+
+        {% endfor %}
+
+        {%endblock%}

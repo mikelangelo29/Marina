@@ -1,0 +1,56 @@
+{%extends 'common.html'%}
+
+{%block content%}
+
+{% load static %}
+    <!--CARD GROUP-->
+    <div class="container card-group">
+        <div class="card">
+            <img src="{% static 'stornara2.jpg' %}" class="card-img-top img-fluid" style="height: 180px;" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">La bonifica della Stornara</h5>
+                <p class="card-text">Senza la dura quanto grande opera di uomini ex-combattenti della Grande Guerra, Ginosa Marina non esisterebbe neanche. Qualche ricordo di quei tempi</p>
+                <p class="card-text"><small class="text-body-secondary">FOTO: cantiere ONC in attività (da "La bonifica della Stornara" - Ed. O.N.C.)</small></p><br><br>
+                <a href="{% url 'stornara' %}"><button type="button" class="btn btn-outline-primary">Scopri di più</button></a> 
+            </div>
+        </div>
+        <div class="card">
+            <img src="{% static 'galvan.jpg' %}" class="card-img-top" style="max-height: 180px"; alt="...">
+            <div class="card-body">
+                <h5 class="card-title">I primi insediamenti</h5> <br>
+                <p class="card-text">Era la fine della guerra. I primi coloni, per la quasi totalità di Ginosa, tornavano a lavoravre le terre assegnate loro. C'era tanta voglia di ricominciare... </p>
+                <p class="card-text"><small class="text-body-secondary">FOTO: Rino Galvan, il primo colono di Ginosa Marina FOTO: cantiere ONC in attività (da "La bonifica della Stornara" - Ed. O.N.C.)</small></p> <br>
+                <a href="{%url 'insediamenti'%}"><button type="button" class="btn btn-outline-primary">Scopri di più</button></a>
+            </div>
+        </div>
+        <div class="card">
+            <img src="{% static 'piazza_stazione.jpg' %}" class="card-img-top" style='height: 180px' alt="...">
+            <div class="card-body">
+                <h5 class="card-title">Gli anni 50-70</h5> <br>
+                <p class="card-text">Sono passati trent'anni dall'inizio dei lavori di bonifica; l'Ente di Riforma Fondiaria completa l'opera...Inizia il boom edilizio di Ginosa Marina.</p> 
+                <p class="card-text"><small class="text-body-secondary">FOTO: Piazza Stazione anni '60 (da Bardinelli - Cossu, "Segni del tempo")</small></p><br><br>
+                <a href="{% url 'cinquanta' %}"><button type="button" class="btn btn-outline-primary">Scopri di più</button></a>
+            </div>
+        </div>
+        <div class="card">
+            <img src="{% static 'orme.avif' %}" class="card-img-top img-fluid" style='height: 180px' alt="...">
+            <div class="card-body">
+                <h5 class="card-title">I personaggi</h5> <br>
+                <p class="card-text">Viaggio tra coloro che hanno lasciato le loro impronte nella storia della Marina. Senza la pretesa di annoverarli tutti, ma con la fiducia di ricevere un contributo ad inserirne altri da parte della gente</p>
+                <p class="card-text"><small class="text-body-secondary">Per segnalazioni: ilfaromarinese@gmail.com</small></p> <br><br>
+                <a href="{% url 'personaggi' %}"> <button type="button" class="btn btn-outline-primary">Scopri di più</button></a>
+            </div>
+        </div>
+        <div class="card">
+            <img src="{% static 'biblio.jpg' %}" class="card-img-top img-fluid" style='height: 180px' alt="...">
+            <div class="card-body">
+                <h5 class="card-title">Bibliografia</h5> <br>
+                <p class="card-text"> La seguente bibliografia è per coloro che desiderano approfondire quanto è qui scritto per cenni.  Ma vale anche come profondo ringraziamento per tutti gli autori delle opere citate e per il loro grande amore dimostrato a questa terra.</p>
+                <p class="card-text"><small class="text-body-secondary">Foto da repertorio</small></p> <br>
+                <a href="{% url 'biblio' %}"> <button type="button" class="btn btn-outline-primary">Scopri di più</button></a>
+            </div>
+        </div>
+    </div>
+
+
+ {%endblock%}

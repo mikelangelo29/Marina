@@ -1,0 +1,21 @@
+{% extends 'common.html' %}
+{%block content%}
+{% load social_share %}
+
+
+
+<div class="container card mb-5" style="width: 80%";>
+    <img src="{{ object.immagine.url }}" class="card-img-top" style="max-height: 450px;" alt="...">
+    <div class="card-body">
+      <h2 class="card-title">{{object.titolo}}</h2>
+      <p class="card-text" style="text-align:justify">{{ object.descrizione|linebreaks}}</p>
+      <p class="card-text text-end"><small class="text-body-secondary">{{ object.data_creazione |date:"d M Y H m"}}</small></p>
+      <p class="card-text text-end" style="font-style: italic;">{{ object.firma }}</p> <br>
+
+
+      {% post_to_facebook  object_or_url  "Post to Facebook" %}
+
+
+    
+
+      {%endblock content%}

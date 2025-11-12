@@ -1,0 +1,32 @@
+{%extends 'common.html'%}
+
+{%block content%}
+
+
+<h1 class="text-center">1950-1970. La nascita della borgata</h1>
+<p class=" container text-center">Con il 1950 avviene una vera metamorfosi. L'E.R.F.(Ente Riforma Agraria) completa l'opera dell' O.N.C. espropriando i latifondi ed assegnandoli a coltivatori diretti. Cominciano a sorgere le prime strutture di servizi, fino agli anni '60, in cui si assiste ad una vera esplosione demografica.</p>
+<!--cards-->
+
+<div class="container mt-5 ">
+    <div class="row">
+        
+        {% for sto in recente %}
+        <div class="col">
+
+            <div class="card my-4" style="width: 18rem">
+                <img src="{{ sto.immagine.url }}" class="card-img-top " style="max-height: 12rem;" alt="...">
+                <div class="card-body">
+                    <h2 class="card-title">{{ sto.titolo }}</h2>
+                    <p class="card-text text-center" style="font-size: 15pt;">{{ sto.descrizione }}</p>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item" ;>{{ sto.item1 }}</li>
+                </ul>
+                
+            </div>
+        </div>
+
+            {% endfor %}
+
+           <a href="https://patrimonio.archivioluce.com/luce-web/detail/IL5000076744/2/ginosa-marina-ministro-colombo-inaugura-nuova-borgata-rurale.html"><h3>VIDEO: 1957 - Il ministro Colombo inaugura Marina di Ginosa</h3></a> 
+        {%endblock%}
