@@ -19,12 +19,16 @@ from django.urls import path, include
 from faro import views 
 from django.conf.urls.static import static
 from django.conf import settings
+from django.views.generic import RedirectView
+from django.templatetags.static import static as static_url
+
 
 
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path("favicon.ico", RedirectView.as_view(url=static_url("favicon.ico"), permanent=True)),
     path('', views.home, name='homepage' ),
     path('turismo/', views.turismo, name='turismo'),
     path('tourism/', include('tourism.urls')), 
