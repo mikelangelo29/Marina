@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from news.models import News 
 from tourism.models import Hotel
-
+from django.db.models import Q
 
 # Create your views here.
 
@@ -32,14 +32,15 @@ def chisiamo (request):
 def sitemap (request):
    return render (request, "sitemap.xml")
 
-def search (request):
-    if 'q' in request.GET and request.GET ['q']:
-        q= request.GET ['q']
-        news= News.objects.filter(descrizione__icontains = q)
-        news=News.objects.filter(titolo__icontains = q)
-        hotels= Hotel.objects.filter(titolo__icontains = q)
-        context = {'news': news, 'hotels':hotels}
-        return render(request, 'search.html', context)
-    else:
-        return render (request, "search.html")
+def search(request):
+    q = request.GET.get("q", "").strip()
+    news = []
+
+    if q:
+        news = News.objects.filter(
+            Q(titolo__icontains=q) | Q(descrizione__icontains=q)
+        )
+
+    context = {"news": news, "q": q}
+    return render(request, "search.html", context)
     
