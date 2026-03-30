@@ -108,42 +108,76 @@
 
     </style>
 
-    <script>
-    document.addEventListener("DOMContentLoaded", function () {
-        const track = document.getElementById("newsTickerTrack");
-        if (!track) return;
+   <script>
+    (function () {
+        let animationId = null;
 
-        track.innerHTML += track.innerHTML;
+        function initTicker() {
+            const track = document.getElementById("newsTickerTrack");
+            if (!track) return;
 
-        let position = 0;
-        let speed = 1;
-        let paused = false;
-
-        function animateTicker() {
-            if (!paused) {
-                position -= speed;
-
-                const halfWidth = track.scrollWidth / 2;
-                if (Math.abs(position) >= halfWidth) {
-                    position = 0;
-                }
-
-                track.style.transform = `translateX(${position}px)`;
+            if (!track.dataset.originalHtml) {
+                track.dataset.originalHtml = track.innerHTML;
             }
 
-            requestAnimationFrame(animateTicker);
+            if (animationId) {
+                cancelAnimationFrame(animationId);
+            }
+
+            track.innerHTML = track.dataset.originalHtml + track.dataset.originalHtml;
+            track.style.transform = "translateX(0px)";
+
+            let position = 0;
+            let speed = 1.5;   // un po' più veloce di prima
+            let paused = false;
+
+            function animateTicker() {
+                if (!paused) {
+                    position -= speed;
+
+                    const halfWidth = track.scrollWidth / 2;
+                    if (Math.abs(position) >= halfWidth) {
+                        position = 0;
+                    }
+
+                    track.style.transform = "translateX(" + position + "px)";
+                }
+
+                animationId = requestAnimationFrame(animateTicker);
+            }
+
+            track.onmouseenter = function () {
+                paused = true;
+            };
+
+            track.onmouseleave = function () {
+                paused = false;
+            };
+
+            track.ontouchstart = function () {
+                paused = true;
+            };
+
+            track.ontouchend = function () {
+                paused = false;
+            };
+
+            animateTicker();
         }
 
-        track.addEventListener("mouseenter", function () {
-            paused = true;
+        document.addEventListener("DOMContentLoaded", initTicker);
+
+        window.addEventListener("pageshow", function () {
+            initTicker();
         });
 
-        track.addEventListener("mouseleave", function () {
-            paused = false;
+        window.addEventListener("pagehide", function () {
+            if (animationId) {
+                cancelAnimationFrame(animationId);
+                animationId = null;
+            }
         });
-
-        animateTicker();
-    });
+    })();
     </script>
 
     {%endblock%}
