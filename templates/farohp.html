@@ -4,12 +4,19 @@
    <h4 class="container text-center">Il faro marinese, piccolo portale tutto su Ginosa Marina</h4>
      <br>
      <br>
-   <marquee onmouseover="stop()" onmouseout="start()"  behavior="scroll" direction="left" scrollamount="10" style="font-size: 16pt;"> In evidenza:  
-    {% for news in newscroll|slice:":9" %}
-   <a href="{% url 'singolo' news.pk %}" style="text-decoration: none; color:#2A52BE ;"> {{news.titolo}} - {{news.data_creazione |date:"d M Y"}}_____________&nbsp;&nbsp;&nbsp;</a>
-    {% endfor %}
+    <div class="news-ticker">
+        <div class="news-ticker-label">In evidenza:</div>
 
-   </marquee>
+        <div class="news-ticker-mask">
+            <div class="news-ticker-track" id="newsTickerTrack">
+                {% for news in newscroll|slice:":9" %}
+                    <a href="{% url 'singolo' news.pk %}" class="news-ticker-item">
+                        {{ news.titolo }} - {{ news.data_creazione|date:"d M Y" }}
+                    </a>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
 <br>
 <br>     
 
@@ -23,7 +30,7 @@
             <img src="https://cdn.pixabay.com/photo/2023/04/05/10/56/writing-7901174_960_720.jpg" class="card-img-top" alt="...">
             <div class="card-body">
                 <h5 class="card-title">Sguardo</h5>
-                <p class="card-text">Non solo ciò che accade, ma ciò che è accaduto. Una raccolta di articoli, letture e cronache che aiutano a comprendere il presente della borgata alla luce della sua storia.</p>
+                <p class="card-text">Uno sguardo su ciò che accade, per capire cosa siamo e cosa stiamo diventando. Non cronaca. Lettura del presente e della comunità.</p>
                 <a href="{% url 'notizie' %}"><button type="button" class="btn btn-outline-primary">Scopri di più</button></a>
             </div>
         </div>
@@ -33,7 +40,7 @@
             <img src="{% static 'storia.jpg' %}" class="card-img-top" alt="...">
             <div class="card-body">
                 <h5 class="card-title">Storia</h5>
-                <p class="card-text">Guardare al passato è un elemento fondamentale per la costruzione di un'identità collettiva che al momento attuale è ancora allo stato embrionale. Chi siamo stati per sapere chi siamo.</p>
+                <p class="card-text">Guardare al passato è un elemento fondamentale per la costruzione di un'identità collettiva, al momento attuale, ancora allo stato embrionale.</p>
                 <a href="{% url 'storia' %}"><button type="button" class="btn btn-outline-primary">Scopri di più</button></a>
             </div>
         </div>
@@ -41,7 +48,7 @@
             <img src="{% static 'torre.jpeg' %}" class="card-img-top" alt="...">
             <div class="card-body">
                 <h5 class="card-title">Natura</h5>
-                <p class="card-text">Le bellezze naturali del territorio. L'incanto marino, la pineta Regina, i Laghi Salinella con Torre Mattoni:contesti perfetti per lo sviluppo di numerose varietà di flora e fauna locale. </p>
+                <p class="card-text">Le bellezze naturali del territorio. L'incanto marino, la pineta Regina, i Laghi Salinella con Torre Mattoni. Cornice alla flora e fauna locale. </p>
                 <a href="{% url 'natura' %}"><button type="button" class="btn btn-outline-primary">Scopri di più</button></a>
             </div>
         </div>
@@ -51,8 +58,93 @@
 
     </div> 
 
+    <style>
+    .news-ticker {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        width: 100%;
+        overflow: hidden;
+    }
 
+    .news-ticker-label {
+        flex: 0 0 auto;
+        font-size: 16pt;
+        font-weight: 700;
+        color: #000;
+    }
 
+    .news-ticker-mask {
+        position: relative;
+        flex: 1;
+        overflow: hidden;
+        white-space: nowrap;
+    }
+
+    .news-ticker-track {
+        display: inline-flex;
+        align-items: center;
+        white-space: nowrap;
+        will-change: transform;
+    }
+
+    .news-ticker-item {
+        display: inline-block;
+        margin-right: 60px;
+        text-decoration: none;
+        color: #2A52BE;
+        font-size: 16pt;
+    }
+
+    .news-ticker-item:hover {
+        text-decoration: underline;
+    }
+    /* MOBILE FIX */
+    @media (max-width: 768px) {
+        .news-ticker-label {
+            display: none;
+        }
+    }
+
+    </style>
+
+    <script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const track = document.getElementById("newsTickerTrack");
+        if (!track) return;
+
+        track.innerHTML += track.innerHTML;
+
+        let position = 0;
+        let speed = 1;
+        let paused = false;
+
+        function animateTicker() {
+            if (!paused) {
+                position -= speed;
+
+                const halfWidth = track.scrollWidth / 2;
+                if (Math.abs(position) >= halfWidth) {
+                    position = 0;
+                }
+
+                track.style.transform = `translateX(${position}px)`;
+            }
+
+            requestAnimationFrame(animateTicker);
+        }
+
+        track.addEventListener("mouseenter", function () {
+            paused = true;
+        });
+
+        track.addEventListener("mouseleave", function () {
+            paused = false;
+        });
+
+        animateTicker();
+    });
+    </script>
 
     {%endblock%}
 
